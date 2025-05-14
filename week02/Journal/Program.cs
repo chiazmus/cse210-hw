@@ -1,5 +1,7 @@
 using System;
 
+// IN order to demonstrate creativity, I made it so it pulls the prompts from a file, to make it easier to generate prompts
+// And I also made it so it asks for your mood and location and saves those in addition to dates and prompts and entries.
 class Program
 {
 
@@ -20,6 +22,54 @@ class Program
 
     static void Main(string[] args)
     {
-        Console.WriteLine("Hello World! This is the Journal Project.");
+
+        Console.WriteLine("Welcome to the Journal Program!");
+
+        PromptGenerator promptGen = new PromptGenerator();
+        promptGen.LoadPrompts("prompts.txt");
+        Journal journal = new Journal();
+
+        // Alright lets do all the menu stuff here, now that the journal and promptgenerator are initiated.
+        bool continueProgram = true;
+
+        while (continueProgram){
+
+            Console.WriteLine("\nPlease select one of the following choices:");
+            Console.WriteLine("1. Write");
+            Console.WriteLine("2. Display");
+            Console.WriteLine("3. Load");
+            Console.WriteLine("4. Save");
+            Console.WriteLine("5. Quit");
+            Console.Write("What would you like to do? ");
+            string choice = Console.ReadLine();
+            
+            if (choice == "1"){
+                Entry newEntry = new Entry();
+                newEntry._promptText = promptGen.GeneratePrompt();
+                Console.WriteLine(newEntry._promptText);
+                Console.Write("Location: ");
+                newEntry._location = Console.ReadLine();
+                Console.Write("Mood: ");
+                newEntry._mood = Console.ReadLine();
+                Console.Write("> ");
+                newEntry._entry = Console.ReadLine();
+                journal.AddEntry(newEntry);
+            } else if (choice == "2") {
+                journal.DisplayEntries();
+            } else if (choice == "3"){
+                journal.Load("journal.txt");
+                Console.WriteLine("Journal Loaded.");
+            } else if (choice == "4"){
+                journal.Save("journal.txt");
+                Console.WriteLine("Journal Saved.");
+            } else if (choice == "5") {
+                continueProgram = false;
+                Console.WriteLine("Good Bye.");
+            } else {
+                Console.WriteLine("That is not a valid choice.  Please try again.");
+            }
+
+        }
+
     }
 }
