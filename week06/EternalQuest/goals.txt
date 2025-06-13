@@ -1,0 +1,6 @@
+2030
+Simple|Venture to Foreign Lands|Visit a new country you've never been to|1|2000
+Checklist|Go Exploring|Visit five new places|20|5|0|100
+Eternal|Go Hiking|Go for a short hike|20
+Checklist|Run 5 Miles|Run a mile five times|10|5|1|50
+Simple|Go Hiking|Go for a hike|1|20
